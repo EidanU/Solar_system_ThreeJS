@@ -97,7 +97,7 @@ const renderer = new THREE.WebGLRenderer({
 
 renderer.setSize(sizes.width, sizes.height);
 
-//Controles
+//Controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
 
@@ -137,6 +137,10 @@ const tick = () =>{
     //rotateAboutPoint(earth, new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 14, 14, 0 ).normalize(), 2 )
     renderer.render(scene, camera)
     window.requestAnimationFrame(tick)
+
+    planetsRotationSpeed.forEach((planet) => {
+        planet.name.planet.rotateY(planet.speed);
+    });
 }
 
 tick()
