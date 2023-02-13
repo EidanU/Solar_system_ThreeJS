@@ -31,6 +31,7 @@ scene.add(venus.planet);
 
 //Earth
 const earth = new CelestialObject(2, 32,16, earthTexture, 49, 0, 0 );
+earth.planet.rotateX(0.401426)
 scene.add(earth.planet);
 
 //Mars
@@ -39,6 +40,7 @@ scene.add(mars.planet);
 
 //Jupiter
 const jupiter = new CelestialObject(4, 32,16, jupiterTexture, 67, 0, 0 );
+jupiter.planet.rotateX(0.0523599);
 scene.add(jupiter.planet);
 
 //Saturne
@@ -47,6 +49,7 @@ scene.add(saturne.planet);
 
 //Uranus
 const uranus = new CelestialObject(1, 32,16, uranusTexture, 91, 0, 0 );
+uranus.planet.rotateX(1.692969);
 scene.add(uranus.planet);
 
 //Neptune
@@ -112,7 +115,20 @@ function rotateAboutPoint(obj, point, axis, theta, pointIsWorld){
 
     obj.rotateOnAxis(axis, theta); // rotate the OBJECT
 }
-const tick = ()=>{
+
+const tick = () =>{
+
+    const planetsRotationSpeed = [
+        { name: sun, speed: 0.00025},
+        { name: mercury, speed: 0.00025},
+        { name: venus, speed: 0.00025},
+        { name: earth, speed: 0.00125},
+        { name: mars, speed: 0.00025},
+        { name: jupiter, speed: 0.003},
+        { name: saturne, speed: 0.00025},
+        { name: uranus, speed: 0.00025},
+        { name: neptune, speed: 0.00025},
+    ]
     controls.update();
     //rotateAboutPoint(earth, new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 14, 14, 0 ).normalize(), 2 )
     renderer.render(scene, camera)

@@ -28,6 +28,8 @@ class CelestialObject {
     updateZ = (Z) => {
         this.planet.position.z += Z;
     }
+
+
 }
 
 export default  CelestialObject;
