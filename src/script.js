@@ -4,6 +4,33 @@ import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 //Scene
 const scene = new THREE.Scene();
 
+//Load textures
+const sunTexture = 'textures/sun.jpeg';
+const mercuryTexture = 'textures/mercury.jpeg';
+const venusTexture = 'textures/venus.jpeg' ;
+const earthTexture = 'textures/earth.jpeg' ;
+const marsTexture = 'textures/mars.jpeg';
+const jupiterTexture = 'textures/jupiter.jpeg';
+const saturnTexture = 'textures/saturn.jpeg';
+const uranusTexture = 'textures/uranus.jpeg';
+const neptuneTexture = 'textures/neptune.jpeg';
+// const plutonTexture = new THREE.TextureLoader().load( 'textures/pluton.jpeg' );
+
+//Sun
+const sun = new CelestialObject(5, 32,16,sunTexture, "#ff9800", 0, 0, 0 );
+scene.add(sun.planet);
+
+//Mercure
+const mercury = new CelestialObject(1, 32,16,'', "#724d00", 7, 0, 0 );
+scene.add(mercury.planet);
+
+//Venus
+const venus = new CelestialObject(1, 32,16,'', "#724d00", 14, 0, 0 );
+scene.add(venus.planet);
+
+//Earth
+const earth = new CelestialObject(2, 32,16,'', "#0a50ff", 21, 0, 0 );
+scene.add(earth.planet);
 
 //Sphere
 const geometrySun = new THREE.SphereGeometry( 5, 32, 16 );
@@ -88,7 +115,7 @@ function rotateAboutPoint(obj, point, axis, theta, pointIsWorld){
 }
 const tick = ()=>{
     controls.update();
-    rotateAboutPoint(earth, new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 14, 14, 0 ).normalize(), 2 )
+    //rotateAboutPoint(earth, new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 14, 14, 0 ).normalize(), 2 )
     renderer.render(scene, camera)
     window.requestAnimationFrame(tick)
 }
