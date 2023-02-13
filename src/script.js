@@ -50,6 +50,23 @@ const saturne = new CelestialObject(3, 32,16, saturnTexture, -84, 0, 0 );
 saturne.planet.rotateX(0.4537856);
 scene.add(saturne.planet);
 
+//Saturne's rings
+const geometrySaturneRings = new THREE.RingBufferGeometry( 5, 7, 64 );
+const ringsTexture = new THREE.TextureLoader().load('https://i.postimg.cc/zz7Gr430/saturn-rings-top.png');
+const pos = geometrySaturneRings.attributes.position;
+const v3 = new THREE.Vector3();
+for (let i = 0; i < pos.count; i++){
+    v3.fromBufferAttribute(pos, i);
+    geometrySaturneRings.attributes.uv.setXY(i, v3.length() < 6 ? 0 : 1, 1);
+}
+const materialSaturneRings = new THREE.MeshPhongMaterial( { map: ringsTexture, side: THREE.DoubleSide, transparent: true, color: 0xffffff} );
+
+const saturneRings = new THREE.Mesh( geometrySaturneRings, materialSaturneRings );
+saturneRings.rotateX(1)
+saturneRings.position.set(-84, 0);
+scene.add(saturneRings);
+
+
 //Uranus
 const uranus = new CelestialObject(1, 32,16, uranusTexture, 91, 0, 0 );
 uranus.planet.rotateX(1.692969);
