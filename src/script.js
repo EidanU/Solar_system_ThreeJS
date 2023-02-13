@@ -5,10 +5,10 @@ import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 const scene = new THREE.Scene();
 
 //Load textures
-const sunTexture = 'textures/sun.jpeg';
+const sunTexture = 'textures/solar-gif.gif';
 const mercuryTexture = 'textures/mercury.jpeg';
-const venusTexture = 'textures/venus.jpeg' ;
-const earthTexture = 'textures/earth.jpeg' ;
+const venusTexture = 'textures/venus.jpeg';
+const earthTexture = 'textures/earth.jpeg';
 const marsTexture = 'textures/mars.jpeg';
 const jupiterTexture = 'textures/jupiter.jpeg';
 const saturnTexture = 'textures/saturn.jpeg';
@@ -79,7 +79,7 @@ const sizes = {
 
 //Camera
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height);
-camera.position.set(0, 0, 60);
+camera.position.set(0, 0, 300);
 scene.add(camera);
 
 //Canvas

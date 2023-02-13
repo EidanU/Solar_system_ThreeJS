@@ -8,7 +8,8 @@ class CelestialObject {
     position;
     texture;
 
-    constructor(radius, widthSegments, heightSegments, texture, planetColor, x, y, z,) {
+    constructor(radius, widthSegments, heightSegments, texture, x, y, z,) {
+
         this.geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments );
         this.materiel = new THREE.MeshPhongMaterial({color: planetColor});
         this.texture = new THREE.TextureLoader().load(texture);
