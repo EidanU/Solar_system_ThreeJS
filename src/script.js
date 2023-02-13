@@ -26,7 +26,8 @@ const mercury = new CelestialObject(1, 32,16,mercuryTexture, 35, 0, 0 );
 scene.add(mercury.planet);
 
 //Venus
-const venus = new CelestialObject(1, 32,16, venusTexture, 42, 0, 0 );
+const venus = new CelestialObject(1, 32,16, venusTexture, -42, 0, 0 );
+venus.planet.rotateX(3.08923);
 scene.add(venus.planet);
 
 //Earth
@@ -35,7 +36,8 @@ earth.planet.rotateX(0.401426)
 scene.add(earth.planet);
 
 //Mars
-const mars = new CelestialObject(1, 32,16, marsTexture, 56, 0, 0 );
+const mars = new CelestialObject(1, 32,16, marsTexture, -56, 0, 0 );
+mars.planet.rotateX(0.436332)
 scene.add(mars.planet);
 
 //Jupiter
@@ -44,7 +46,8 @@ jupiter.planet.rotateX(0.0523599);
 scene.add(jupiter.planet);
 
 //Saturne
-const saturne = new CelestialObject(3, 32,16, saturnTexture, 84, 0, 0 );
+const saturne = new CelestialObject(3, 32,16, saturnTexture, -84, 0, 0 );
+saturne.planet.rotateX(0.4537856);
 scene.add(saturne.planet);
 
 //Uranus
@@ -53,7 +56,8 @@ uranus.planet.rotateX(1.692969);
 scene.add(uranus.planet);
 
 //Neptune
-const neptune = new CelestialObject(1, 32,16, neptuneTexture, 97, 0, 0 );
+const neptune = new CelestialObject(1, 32,16, neptuneTexture, -97, 0, 0 );
+neptune.planet.rotateX(0.4886922);
 scene.add(neptune.planet);
 
 //Pluton
