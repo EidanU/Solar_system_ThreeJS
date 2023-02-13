@@ -9,10 +9,10 @@ class CelestialObject {
     texture;
 
     constructor(radius, widthSegments, heightSegments, texture, x, y, z,) {
-
         this.geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments );
-        this.materiel = new THREE.MeshPhongMaterial({color: planetColor});
         this.texture = new THREE.TextureLoader().load(texture);
+        this.materiel = new THREE.MeshPhongMaterial({map: this.texture});
+        //this.texture = new THREE.TextureLoader().load(texture);
         this.planet = new THREE.Mesh(this.geometry, this.materiel);
         this.planet.position.set(x, y, z);
     }

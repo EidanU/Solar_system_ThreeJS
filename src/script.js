@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+import CelestialObject from "./CelestialObject.js";
 
 //Scene
 const scene = new THREE.Scene();
@@ -17,45 +18,43 @@ const neptuneTexture = 'textures/neptune.jpeg';
 // const plutonTexture = new THREE.TextureLoader().load( 'textures/pluton.jpeg' );
 
 //Sun
-const sun = new CelestialObject(5, 32,16,sunTexture, "#ff9800", 0, 0, 0 );
+const sun = new CelestialObject(30, 32,16, sunTexture, 0, 0, 0 );
 scene.add(sun.planet);
 
 //Mercure
-const mercury = new CelestialObject(1, 32,16,'', "#724d00", 7, 0, 0 );
+const mercury = new CelestialObject(1, 32,16,mercuryTexture, 35, 0, 0 );
 scene.add(mercury.planet);
 
 //Venus
-const venus = new CelestialObject(1, 32,16,'', "#724d00", 14, 0, 0 );
+const venus = new CelestialObject(1, 32,16, venusTexture, 42, 0, 0 );
 scene.add(venus.planet);
 
 //Earth
-const earth = new CelestialObject(2, 32,16,'', "#0a50ff", 21, 0, 0 );
+const earth = new CelestialObject(2, 32,16, earthTexture, 49, 0, 0 );
 scene.add(earth.planet);
 
-//Sphere
-const geometrySun = new THREE.SphereGeometry( 5, 32, 16 );
-const materialSun = new THREE.MeshPhongMaterial({color: "#ff9800"})
-const sun = new THREE.Mesh(geometrySun, materialSun);
-sun.position.set(0,0,  )
-scene.add(sun);
+//Mars
+const mars = new CelestialObject(1, 32,16, marsTexture, 56, 0, 0 );
+scene.add(mars.planet);
 
-const geometryMercury = new THREE.SphereGeometry( 1, 32, 16 );
-const materialMercury = new THREE.MeshPhongMaterial({color: "#724d00"})
-const Mercury = new THREE.Mesh(geometryMercury, materialMercury);
-Mercury.position.set(7,0)
-scene.add(Mercury);
+//Jupiter
+const jupiter = new CelestialObject(4, 32,16, jupiterTexture, 67, 0, 0 );
+scene.add(jupiter.planet);
 
-const geometryEarth = new THREE.SphereGeometry( 2, 32, 16 );
-const materialEarth  = new THREE.MeshPhongMaterial({color: "#0a50ff"})
-const earth = new THREE.Mesh(geometryEarth, materialEarth);
-earth.position.set(14,0)
-scene.add(earth);
+//Saturne
+const saturne = new CelestialObject(3, 32,16, saturnTexture, 84, 0, 0 );
+scene.add(saturne.planet);
 
-const geometryMars = new THREE.SphereGeometry( 1, 32, 16 );
-const materialMars  = new THREE.MeshPhongMaterial({color: "#833400"})
-const mars = new THREE.Mesh(geometryMars, materialMars);
-mars.position.set(21,0)
-scene.add(mars);
+//Uranus
+const uranus = new CelestialObject(1, 32,16, uranusTexture, 91, 0, 0 );
+scene.add(uranus.planet);
+
+//Neptune
+const neptune = new CelestialObject(1, 32,16, neptuneTexture, 97, 0, 0 );
+scene.add(neptune.planet);
+
+//Pluton
+
 
 const light = new THREE.DirectionalLight( "#ffffff", 1 );
 light.position.set(70, 70, 0)
@@ -63,8 +62,8 @@ const ambientLight = new THREE.AmbientLight( "#ffffff",  .1);
 scene.add(light);
 scene.add(ambientLight);
 
-let w;
-let h;
+let w = 600;
+let h = 400;
 
 if (typeof window !== "undefined") {
      w = window.innerWidth;
