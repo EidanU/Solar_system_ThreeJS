@@ -63,10 +63,7 @@ scene.add(neptune.planet);
 //Pluton
 
 
-const light = new THREE.DirectionalLight( "#ffffff", 1 );
-light.position.set(70, 70, 0)
-const ambientLight = new THREE.AmbientLight( "#ffffff",  .1);
-scene.add(light);
+const ambientLight = new THREE.AmbientLight( "#ffffff",  1);
 scene.add(ambientLight);
 
 let w = 600;
