@@ -17,9 +17,6 @@ const saturnTexture = 'textures/saturn.jpeg';
 const uranusTexture = 'textures/uranus.jpeg';
 const neptuneTexture = 'textures/neptune.jpeg';
 
-
-// const plutonTexture = new THREE.TextureLoader().load( 'textures/pluton.jpeg' );
-
 //Sun
 const sun = new CelestialObject(30, 32,16, sunTexture, 0, 0, 0 );
 scene.add(sun.planet);
@@ -83,6 +80,9 @@ scene.add(neptune.planet);
 //Pluton
 
 
+
+
+
 const ambientLight = new THREE.AmbientLight( "#ffffff",  1);
 scene.add(ambientLight);
 
@@ -134,6 +134,17 @@ const planets = [
     { name: neptune, speed: 0.00025, position: {x: -97, y:0, z:0}, velocity: 1.001},
     { name: saturneRings, speed: 0.00025, position: {x: -84, y:0, z:0}, velocity: 1.007},
 ];
+
+//planet path
+planets.forEach((planet, index) => {
+    if(planet.position.x !== 0) {
+        const geometryPlanetPath = new THREE.TorusGeometry( planet.position.x,0.02, 3, 100);
+        const materialPlanetPath = new THREE.MeshPhongMaterial( { color: "white" } );
+        const planetPath = new THREE.Mesh( geometryPlanetPath, materialPlanetPath );
+        planetPath.rotateX(  Math.PI / 2)
+        scene.add(planetPath);
+    };
+})
 
 const tick = () => {
     controls.update();
