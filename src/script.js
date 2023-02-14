@@ -120,7 +120,7 @@ controls.enableDamping = true
 
 
 const sunAxis = new THREE.Vector3( sun.planet.position.x, sun.planet.position.y, sun.planet.position.z)
-const clock = new Clock();
+const clock = new Clock();;
 
 const planets = [
     { name: sun, speed: 0.00025, position:{x: 0, y: 0, z: 0}, velocity: 1.001},
@@ -158,3 +158,4 @@ const tick = () => {
 
 tick();
 
+//reacaster
