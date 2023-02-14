@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 import CelestialObject from "./CelestialObject.js";
+import {Clock} from "three";
 
 //Scene
 const scene = new THREE.Scene();
@@ -15,6 +16,8 @@ const jupiterTexture = 'textures/jupiter.jpeg';
 const saturnTexture = 'textures/saturn.jpeg';
 const uranusTexture = 'textures/uranus.jpeg';
 const neptuneTexture = 'textures/neptune.jpeg';
+
+
 // const plutonTexture = new THREE.TextureLoader().load( 'textures/pluton.jpeg' );
 
 //Sun
@@ -134,26 +137,29 @@ function rotateAboutPoint(obj, point, axis, theta, pointIsWorld){
     obj.rotateOnAxis(axis, theta); // rotate the OBJECT
 }
 
-const tick = () =>{
+const sunAxis = new THREE.Vector3( sun.planet.position.x, sun.planet.position.y, sun.planet.position.z)
+const clock = new Clock();
 
-    const planetsRotationSpeed = [
-        { name: sun, speed: 0.00025},
-        { name: mercury, speed: 0.00025},
-        { name: venus, speed: 0.00025},
-        { name: earth, speed: 0.00125},
-        { name: mars, speed: 0.00025},
-        { name: jupiter, speed: 0.003},
-        { name: saturne, speed: 0.00025},
-        { name: uranus, speed: 0.00025},
-        { name: neptune, speed: 0.00025},
-    ]
+const planets = [
+    { name: sun, speed: 0.00025, position:{x: 0, y: 0, z: 0}},
+    { name: mercury, speed: 0.00025, position: {x:35, y:0, z:0}},
+    { name: venus, speed: 0.00025, position: {x:42, y:0, z: 0}},
+    { name: earth, speed: 0.00125, position: {x:49, y:0, z:0}},
+    { name: mars, speed: 0.00025, position: {x:-56, y:0, z:0}},
+    { name: jupiter, speed: 0.003, position: {x:67, y:0, z:0}},
+    { name: saturne, speed: 0.00025, position:  {x:-84, y: 0,z: 0}},
+    { name: uranus, speed: 0.00025, position: {x:91, y: 0, z: 0}},
+    { name: neptune, speed: 0.00025, position: {x: -97, y:0, z:0}},
+]
+const tick = () => {
     controls.update();
-    //rotateAboutPoint(earth, new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 14, 14, 0 ).normalize(), 2 )
     renderer.render(scene, camera)
     window.requestAnimationFrame(tick)
 
-    planetsRotationSpeed.forEach((planet) => {
+    planets.forEach((planet) => {
         planet.name.planet.rotateY(planet.speed);
+        planet.name.planet.position.x = sun.planet.position.x + (Math.cos(clock.getElapsedTime())* planet.position.x)
+        planet.name.planet.position.z = sun.planet.position.z + (Math.sin(clock.getElapsedTime())* planet.position.x)
     });
 }
 
