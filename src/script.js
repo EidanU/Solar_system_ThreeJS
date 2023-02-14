@@ -136,11 +136,7 @@ planets.forEach((planet, index) => {
     }
 })
 
-const tick = () => {
-    controls.update();
-    renderer.render(scene, camera)
-    window.requestAnimationFrame(tick)
-
+const updatePositions = () => {
     planets.forEach((planet) => {
         if(planet.name.planet){
             planet.name.planet.rotateY(planet.speed);
@@ -156,8 +152,14 @@ const tick = () => {
             planet.name.position.z
                 = saturne.planet.position.z + (Math.sin(clock.getElapsedTime()));
         }
-
     });
+}
+
+const tick = () => {
+    controls.update();
+    renderer.render(scene, camera)
+    window.requestAnimationFrame(tick)
+    updatePositions();
 }
 
 tick();
