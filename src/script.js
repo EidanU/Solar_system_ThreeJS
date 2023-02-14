@@ -119,8 +119,8 @@ const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
 
 
-const sunAxis = new THREE.Vector3( sun.planet.position.x, sun.planet.position.y, sun.planet.position.z)
-const clock = new Clock();;
+
+const clock = new Clock();
 
 const planets = [
     { name: sun, speed: 0.00025, position:{x: 0, y: 0, z: 0}, velocity: 1.001},
@@ -144,7 +144,7 @@ planets.forEach((planet, index) => {
         planetPath.rotateX(  Math.PI / 2)
         scene.add(planetPath);
     };
-})
+});
 
 const tick = () => {
     controls.update();
@@ -155,13 +155,16 @@ const tick = () => {
         if(planet.name.planet){
             planet.name.planet.rotateY(planet.speed);
             planet.name.planet.position.x =
-                (sun.planet.position.x + (Math.cos(clock.getElapsedTime() * planet.velocity)* planet.position.x)) ;
+                (sun.planet.position.x + (Math.cos(clock.getElapsedTime() * planet.velocity) * planet.position.x));
             planet.name.planet.position.z =
-                ( sun.planet.position.z + (Math.sin(clock.getElapsedTime() * planet.velocity)* planet.position.x)) ;
-        } else{
+                ( sun.planet.position.z + (Math.sin(clock.getElapsedTime() * planet.velocity) * planet.position.x));
+        } else {
+            //Saturne rings
             planet.name.rotateY(planet.speed);
-            planet.name.position.x += sun.planet.position.x + (Math.cos(clock.getElapsedTime())* planet.position.x) ;
-            planet.name.position.z += sun.planet.position.z + (Math.sin(clock.getElapsedTime())* planet.position.x) ;
+            planet.name.position.x
+                = sun.planet.position.x + (Math.cos(clock.getElapsedTime()) * planet.position.x);
+            planet.name.position.z
+                = sun.planet.position.z + (Math.sin(clock.getElapsedTime()) * planet.position.x);
         }
 
     });
