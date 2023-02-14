@@ -16,6 +16,7 @@ const jupiterTexture = 'textures/jupiter.jpeg';
 const saturnTexture = 'textures/saturn.jpeg';
 const uranusTexture = 'textures/uranus.jpeg';
 const neptuneTexture = 'textures/neptune.jpeg';
+const plutonTexture = 'textures/pluton.jpeg';
 
 //Sun
 const sun = new CelestialObject(30, 32,16, sunTexture, 0, 0, 0 );
@@ -66,7 +67,6 @@ saturneRings.rotateX(1)
 saturneRings.position.set(-84, 0);
 scene.add(saturneRings);
 
-
 //Uranus
 const uranus = new CelestialObject(1, 32,16, uranusTexture, 91, 0, 0 );
 uranus.planet.rotateX(1.692969);
@@ -77,23 +77,15 @@ const neptune = new CelestialObject(1, 32,16, neptuneTexture, -97, 0, 0 );
 neptune.planet.rotateX(0.4886922);
 scene.add(neptune.planet);
 
-//Pluton
-
-
-
-
-
 const ambientLight = new THREE.AmbientLight( "#ffffff",  1);
 scene.add(ambientLight);
 
 let w = 600;
 let h = 400;
-
 if (typeof window !== "undefined") {
      w = window.innerWidth;
      h = window.innerHeight;
 }
-
 //Sizes
 const sizes = {
     width: w,
@@ -118,8 +110,6 @@ renderer.setSize(sizes.width, sizes.height);
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
 
-
-
 const clock = new Clock();
 
 const planets = [
@@ -143,8 +133,8 @@ planets.forEach((planet, index) => {
         const planetPath = new THREE.Mesh( geometryPlanetPath, materialPlanetPath );
         planetPath.rotateX(  Math.PI / 2)
         scene.add(planetPath);
-    };
-});
+    }
+})
 
 const tick = () => {
     controls.update();
@@ -162,9 +152,9 @@ const tick = () => {
             //Saturne rings
             planet.name.rotateY(planet.speed);
             planet.name.position.x
-                = sun.planet.position.x + (Math.cos(clock.getElapsedTime()) * planet.position.x);
+                = saturne.planet.position.x + (Math.cos(clock.getElapsedTime()));
             planet.name.position.z
-                = sun.planet.position.z + (Math.sin(clock.getElapsedTime()) * planet.position.x);
+                = saturne.planet.position.z + (Math.sin(clock.getElapsedTime()));
         }
 
     });
