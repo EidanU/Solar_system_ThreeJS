@@ -124,15 +124,15 @@ const clock = new Clock();
 
 const planets = [
     { name: sun, speed: 0.00025, position:{x: 0, y: 0, z: 0}, velocity: 1.001},
-    { name: mercury, speed: 0.00025, position: {x:35, y:0, z:0}, velocity: 1.002},
+    { name: mercury, speed: 0.00025, position: {x:35, y:0, z: 0}, velocity: 1.002},
     { name: venus, speed: 0.00025, position: {x:42, y:0, z: 0}, velocity: 1.006},
-    { name: earth, speed: 0.00125, position: {x:49, y:0, z:0}, velocity: 1.008},
-    { name: mars, speed: 0.00025, position: {x:-56, y:0, z:0}, velocity: 1.004},
-    { name: jupiter, speed: 0.003, position: {x:67, y:0, z:0}, velocity: 1.006},
+    { name: earth, speed: 0.00125, position: {x:49, y:0, z: 0}, velocity: 1.008},
+    { name: mars, speed: 0.00025, position: {x:-56, y:0, z: 0 }, velocity: 1.004},
+    { name: jupiter, speed: 0.003, position: {x:67, y:0, z: 0}, velocity: 1.006},
     { name: saturne, speed: 0.00025, position:  {x:-84, y: 0,z: 0}, velocity: 1.009},
-    { name: uranus, speed: 0.00025, position: {x:91, y: 0, z: 0}, velocity: 1.007},
-    { name: neptune, speed: 0.00025, position: {x: -97, y:0, z:0}, velocity: 1.001},
-    { name: saturneRings, speed: 0.00025, position: {x: -84, y:0, z:0}, velocity: 1.007},
+    { name: uranus, speed: 0.00025, position: {x:91, y: 0, z: 0 }, velocity: 1.007},
+    { name: neptune, speed: 0.00025, position: {x: -97, y:0, z: 0}, velocity: 1.001},
+    { name: saturneRings, speed: 0.00025, position: {x: -84, y:0, z: 0}, velocity: 1.007},
 ];
 
 //planet path
