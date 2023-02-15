@@ -4,6 +4,7 @@ export const handleClickObject = (intersects, camera, planets) => {
     if (intersects.length === 0) {
         return null
     }
+
     return planets.filter((planet)=>{
         return planet.planet.name === intersects[0].object.name;
     })[0]

@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import gsap from 'gsap';
+
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 import CelestialObject from "./CelestialObject.js";
 import {Clock} from "three";
@@ -9,6 +11,7 @@ import {createPlanetPath} from "./utils/createPlanetPath.js";
 
 //Scene
 const scene = new THREE.Scene();
+const clock = new Clock();
 
 // Raycaster
 const raycaster = new THREE.Raycaster();
@@ -117,9 +120,9 @@ const sizes = {
 //Camera
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height);
 camera.position.set(0, 0, 300);
-scene.add(camera);
+// scene.add(camera);
+//
 
-//Canvas
 const canvas = document.querySelector('.webgl');
 
 const renderer = new THREE.WebGLRenderer({
@@ -130,9 +133,7 @@ renderer.setSize(sizes.width, sizes.height);
 
 //Controls
 const controls = new OrbitControls(camera, canvas)
-controls.enableDamping = true
-
-const clock = new Clock();
+controls.enableDamping = true;
 
 const planets = [
     { name: sun, speed: 0.00025, position:{x: 0, y: 0, z: 0}, velocity: 0.1},
