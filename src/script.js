@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 import CelestialObject from "./CelestialObject.js";
 import {Clock} from "three";
+import {onPointerMove} from "./utils/pointerMove.js";
 
 //Scene
 const scene = new THREE.Scene();
@@ -120,20 +121,20 @@ controls.enableDamping = true
 const clock = new Clock();
 
 const planets = [
-    { name: sun, speed: 0.00025, position:{x: 0, y: 0, z: 0}, velocity: 1.001},
-    { name: mercury, speed: 0.00025, position: {x: 35, y:0, z: 0}, velocity: 1.002},
-    { name: venus, speed: 0.00025, position: {x:42, y:0, z: 0}, velocity: 1.006},
-    { name: earth, speed: 0.00125, position: {x:49, y:0, z: 0}, velocity: 1.008},
-    { name: mars, speed: 0.00025, position: {x:-56, y:0, z: 0 }, velocity: 1.004},
-    { name: jupiter, speed: 0.003, position: {x:67, y:0, z: 0}, velocity: 1.006},
-    { name: saturne, speed: 0.00025, position:  {x:-84, y: 0,z: 0}, velocity: 1.009},
-    { name: uranus, speed: 0.00025, position: {x:91, y: 0, z: 0 }, velocity: 1.007},
-    { name: neptune, speed: 0.00025, position: {x: -97, y:0, z: 0}, velocity: 1.001},
-    { name: saturneRings, speed: 0.00025, position: {x: -84, y:0, z: 0}, velocity: 1.007},
+    { name: sun, speed: 0.00025, position:{x: 0, y: 0, z: 0}, velocity: 1.0001},
+    { name: mercury, speed: 0.00025, position: {x: 35, y:0, z: 0}, velocity: 1.0002},
+    { name: venus, speed: 0.00025, position: {x:42, y:0, z: 0}, velocity: 1.0006},
+    { name: earth, speed: 0.00125, position: {x:49, y:0, z: 0}, velocity: 1.0008},
+    { name: mars, speed: 0.00025, position: {x:-56, y:0, z: 0 }, velocity: 1.0004},
+    { name: jupiter, speed: 0.003, position: {x:67, y:0, z: 0}, velocity: 1.0006},
+    { name: saturne, speed: 0.00025, position:  {x:-84, y: 0,z: 0}, velocity: 1.0009},
+    { name: uranus, speed: 0.00025, position: {x:91, y: 0, z: 0 }, velocity: 1.0007},
+    { name: neptune, speed: 0.00025, position: {x: -97, y:0, z: 0}, velocity: 1.0001},
+    { name: saturneRings, speed: 0.00025, position: {x: -84, y:0, z: 0}, velocity: 1.0007},
 ];
 
-//planet path
-planets.forEach((planet, index) => {
+//Create planet path
+planets.forEach((planet) => {
     if(planet.position.x !== 0) {
         const geometryPlanetPath = new THREE.TorusGeometry( planet.position.x,0.02, 3, 100);
         const materialPlanetPath = new THREE.MeshPhongMaterial( { color: "white" } );
@@ -141,7 +142,7 @@ planets.forEach((planet, index) => {
         planetPath.rotateX(  Math.PI / 2)
         scene.add(planetPath);
     }
-})
+});
 
 const updatePositions = () => {
     planets.forEach((planet) => {
@@ -160,13 +161,6 @@ const updatePositions = () => {
                 = saturne.planet.position.z + (Math.sin(clock.getElapsedTime()));
         }
     });
-}
-
-
-const handleClickObject = ()=>{
-    if(intersects.length !== 0){
-        intersects[0].object.material.color.set( 0xff0000 );
-    }
 }
 
 const tick = () => {
