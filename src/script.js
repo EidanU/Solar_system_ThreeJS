@@ -16,6 +16,7 @@ const pointer = new THREE.Vector2();
 let intersects;
 let planetToFollow;
 let planetList = [];
+let isZooming = false
 
 //Load textures
 const sunTexture = 'textures/solar-gif.gif';
@@ -134,34 +135,105 @@ controls.enableDamping = true
 const clock = new Clock();
 
 const planets = [
-    { name: sun, speed: 0.00025, position:{x: 0, y: 0, z: 0}, velocity: 1.01},
-    { name: mercury, speed: 0.00025, position: {x: 35, y:0, z: 0}, velocity: 1.02},
-    { name: venus, speed: 0.00025, position: {x:42, y:0, z: 0}, velocity: 1.006},
-    { name: earth, speed: 0.00125, position: {x:49, y:0, z: 0}, velocity: 1.8},
-    { name: mars, speed: 0.00025, position: {x:-56, y:0, z: 0 }, velocity: 1.4},
-    { name: jupiter, speed: 0.003, position: {x:67, y:0, z: 0}, velocity: 1.06},
-    { name: saturne, speed: 0.00025, position:  {x:-84, y: 0,z: 0}, velocity: 1.09},
-    { name: uranus, speed: 0.00025, position: {x:91, y: 0, z: 0 }, velocity: 1.007},
-    { name: neptune, speed: 0.00025, position: {x: -97, y:0, z: 0}, velocity: 1.01},
-    { name: saturneRings, speed: 0.00025, position: {x: -84, y:0, z: 0}, velocity: 1.007},
+    { name: sun, speed: 0.00025, position:{x: 0, y: 0, z: 0}, velocity: 0.1},
+    { name: mercury, speed: 0.00025, position: {x: 35, y:0, z: 0}, velocity: 0.5},
+    { name: venus, speed: 0.00025, position: {x:42, y:0, z: 0}, velocity: 0.2},
+    { name: earth, speed: 0.00125, position: {x:49, y:0, z: 0}, velocity: 0.1},
+    { name: mars, speed: 0.00025, position: {x:-56, y:0, z: 0 }, velocity: 0.6},
+    { name: jupiter, speed: 0.003, position: {x:67, y:0, z: 0}, velocity: 0.2},
+    { name: saturne, speed: 0.00025, position:  {x:-84, y: 0,z: 0}, velocity: 0.5},
+    { name: uranus, speed: 0.00025, position: {x:91, y: 0, z: 0 }, velocity: 0.7},
+    { name: neptune, speed: 0.00025, position: {x: -97, y:0, z: 0}, velocity: 0.2},
+    { name: saturneRings, speed: 0.00025, position: {x: -84, y:0, z: 0}, velocity: 0.1},
 ];
 
 //Create planet path
 createPlanetPath(planets, scene);
 
+//Text
+const loader = new FontLoader();
+let textMesh = null;
+loader.load( 'fonts/helvetiker_regular.typeface.json', ( font ) => {
+    console.log('test')
+    const textGeometry = new TextGeometry( 'Solar system', {
+        font: font,
+        size: 1,
+        height: 1,
+        //curveSegments: .5,
+        //bevelEnabled: true,
+       // bevelThickness: .05,
+       // bevelSize: .05,
+     //   bevelOffset: 0,
+     //   bevelSegments: 0.5
+    });
 
-const tick = () => {
+    const textMaterial = new THREE.MeshBasicMaterial(
+        { color: 'white', specular: 0xffffff }
+    );
+
+    textMesh = new THREE.Mesh(textGeometry, textMaterial);
+    scene.add(textMesh);
+
+  // textMesh.position.set(
+    //    planetToFollow.planet.position.x,
+      //  planetToFollow.planet.position.y,
+        //planetToFollow.planet.position.z
+    //);
+    textMesh.quaternion.copy(camera.quaternion);
+
+});
+//End Text
+
+const cameraZooming = async () => {
+    controls.target.set(
+        planetToFollow.planet.position.x,
+        planetToFollow.planet.position.y,
+        planetToFollow.planet.position.z
+    );
+   await gsap.to(camera.position,
+    {
+           z: planetToFollow.planet.position.z +  planetToFollow.sizes.x + 10,
+           x: planetToFollow.planet.position.x + planetToFollow.sizes.y + 10,
+           y: planetToFollow.planet.position.y + planetToFollow.sizes.z + 10,
+           duration: 2
+        }
+   );
+     camera.lookAt(planetToFollow.planet.position.x, planetToFollow.planet.position.y, planetToFollow.planet.position.z);
+    isZooming = false
+}
+
+let timePassed = 0;
+
+
+const tick = async  () => {
     raycaster.setFromCamera( pointer, camera );
-    intersects = raycaster.intersectObjects( scene.children );
-    planetToFollow && handleFollow(planetToFollow.planet, planetToFollow.sizes, camera);
+    intersects = raycaster.intersectObjects(scene.children);
     controls.update();
-    renderer.render(scene, camera)
-    window.requestAnimationFrame(tick)
-   // updatePositions(planets, sun, saturne, clock);
+    renderer.render(scene, camera);
+    window.requestAnimationFrame(tick);
+    if (!isZooming) {
+        updatePositions(planets, sun, saturne, clock, timePassed);
+       planetToFollow && handleFollow(planetToFollow.planet, planetToFollow.sizes, camera, controls);
+        textMesh && textMesh.lookAt(camera.position);
+        textMesh && planetToFollow && textMesh.position.set(
+            planetToFollow.planet.position.x,
+            planetToFollow.planet.position.y + 5,
+            planetToFollow.planet.position.z
+        );
+
+    } else {
+        timePassed = clock.getElapsedTime();
+    }
 }
 
 tick();
 
 window.addEventListener( 'pointermove',(e)=> onPointerMove(e,pointer) );
-window.addEventListener( 'click', () => planetToFollow = handleClickObject(intersects, camera, planetList));
+window.addEventListener( 'click', async () => {
+    planetToFollow = handleClickObject(intersects, camera, planetList, controls)
+    if(planetToFollow){
+        isZooming = true
+        await cameraZooming();
+    }
+});
 
