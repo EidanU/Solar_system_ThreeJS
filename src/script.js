@@ -148,11 +148,11 @@ const tick = () => {
     controls.update();
     renderer.render(scene, camera)
     window.requestAnimationFrame(tick)
-    updatePositions(planets, sun, saturne, clock);
+   // updatePositions(planets, sun, saturne, clock);
 }
 
 tick();
 
 window.addEventListener( 'pointermove',(e)=> onPointerMove(e,pointer) );
-window.addEventListener( 'click', () => planetToFollow = handleClickObject(intersects, camera, jupiter));
+window.addEventListener( 'click', () => planetToFollow = handleClickObject(intersects, camera, planetList));
 
