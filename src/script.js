@@ -3,6 +3,9 @@ import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 import CelestialObject from "./CelestialObject.js";
 import {Clock} from "three";
 import {onPointerMove} from "./utils/pointerMove.js";
+import {handleClickObject} from "./utils/handleClick.js";
+import {updatePositions} from "./utils/updatePositions.js";
+import {createPlanetPath} from "./utils/createPlanetPath.js";
 
 //Scene
 const scene = new THREE.Scene();
@@ -134,34 +137,7 @@ const planets = [
 ];
 
 //Create planet path
-planets.forEach((planet) => {
-    if(planet.position.x !== 0) {
-        const geometryPlanetPath = new THREE.TorusGeometry( planet.position.x,0.02, 3, 100);
-        const materialPlanetPath = new THREE.MeshPhongMaterial( { color: "white" } );
-        const planetPath = new THREE.Mesh( geometryPlanetPath, materialPlanetPath );
-        planetPath.rotateX(  Math.PI / 2)
-        scene.add(planetPath);
-    }
-});
-
-const updatePositions = () => {
-    planets.forEach((planet) => {
-        if(planet.name.planet){
-            planet.name.planet.rotateY(planet.speed);
-            planet.name.planet.position.x =
-                (sun.planet.position.x + (Math.cos(clock.getElapsedTime() * planet.velocity) * planet.position.x));
-            planet.name.planet.position.z =
-                ( sun.planet.position.z + (Math.sin(clock.getElapsedTime() * planet.velocity) * planet.position.x));
-        } else {
-            //Saturne rings
-            planet.name.rotateY(planet.speed);
-            planet.name.position.x
-                = saturne.planet.position.x + (Math.cos(clock.getElapsedTime()));
-            planet.name.position.z
-                = saturne.planet.position.z + (Math.sin(clock.getElapsedTime()));
-        }
-    });
-}
+createPlanetPath(planets, scene);
 
 const tick = () => {
     raycaster.setFromCamera( pointer, camera );
@@ -169,13 +145,13 @@ const tick = () => {
     controls.update();
     renderer.render(scene, camera)
     window.requestAnimationFrame(tick)
-    updatePositions();
+    updatePositions(planets, sun, saturne, clock);
 }
 
 tick();
 
 window.addEventListener( 'pointermove',(e)=> onPointerMove(e,pointer) );
-window.addEventListener( 'click', handleClickObject );
+window.addEventListener( 'click', () => handleClickObject(intersects) );
 
 //reacaster
 
