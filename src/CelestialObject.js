@@ -9,7 +9,7 @@ class CelestialObject {
     texture;
     sizes;
 
-    constructor(radius, widthSegments, heightSegments, texture, x, y, z,name) {
+    constructor(radius, widthSegments, heightSegments, texture, x, y, z, name) {
         this.geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments );
         this.texture = new THREE.TextureLoader().load(texture);
         this.materiel = new THREE.MeshPhongMaterial({map: this.texture});

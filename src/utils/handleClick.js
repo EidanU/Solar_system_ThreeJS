@@ -1,10 +1,7 @@
 import * as THREE from "three";
 
-export const handleClickObject = (intersects, camera, jupiter) => {
-    if (intersects.length !== 0) {
-        console.log(intersects[0])
-        return jupiter
-    }else{
+export const handleClickObject = (intersects, camera, planets) => {
+    if (intersects.length === 0) {
         return null
     }
     return planets.filter((planet)=>{

@@ -15,6 +15,7 @@ const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 let intersects;
 let planetToFollow;
+let planetList = [];
 
 //Load textures
 const sunTexture = 'textures/solar-gif.gif';
@@ -29,38 +30,44 @@ const neptuneTexture = 'textures/neptune.jpeg';
 
 //Sun
 const sun = new CelestialObject(30, 32,16, sunTexture, 0, 0, 0, "sun" );
-
+planetList.push(sun);
 scene.add(sun.planet);
 
 
 //Mercure
 const mercury = new CelestialObject(1, 32,16,mercuryTexture, 35, 0, 0, "mercury" );
+planetList.push(mercury);
 scene.add(mercury.planet);
 
 //Venus
 const venus = new CelestialObject(1, 32,16, venusTexture, -42, 0, 0 , "venus");
 venus.planet.rotateX(3.08923);
+planetList.push(venus);
 scene.add(venus.planet);
 
 
 //Earth
 const earth = new CelestialObject(2, 32,16, earthTexture, 49, 0, 0, "earth" );
-earth.planet.rotateX(0.401426)
+earth.planet.rotateX(0.401426);
+planetList.push(earth);
 scene.add(earth.planet);
 
 //Mars
 const mars = new CelestialObject(1, 32,16, marsTexture, -56, 0, 0, "mars" );
-mars.planet.rotateX(0.436332)
+mars.planet.rotateX(0.436332);
+planetList.push(mars);
 scene.add(mars.planet);
 
 //Jupiter
 const jupiter = new CelestialObject(4, 32,16, jupiterTexture, 67, 0, 0, "jupiter" );
 jupiter.planet.rotateX(0.0523599);
+planetList.push(jupiter);
 scene.add(jupiter.planet);
 
 //Saturne
 const saturne = new CelestialObject(3, 32,16, saturnTexture, -84, 0, 0, "saturne" );
 saturne.planet.rotateX(0.4537856);
+planetList.push(saturne);
 scene.add(saturne.planet);
 
 //Saturne's rings
@@ -82,11 +89,13 @@ scene.add(saturneRings);
 //Uranus
 const uranus = new CelestialObject(1, 32,16, uranusTexture, 91, 0, 0, "uranus" );
 uranus.planet.rotateX(1.692969);
+planetList.push(uranus);
 scene.add(uranus.planet);
 
 //Neptune
 const neptune = new CelestialObject(1, 32,16, neptuneTexture, -97, 0, 0, "neptune" );
 neptune.planet.rotateX(0.4886922);
+planetList.push(neptune);
 scene.add(neptune.planet);
 
 const ambientLight = new THREE.AmbientLight( "#ffffff",  1);
@@ -125,16 +134,16 @@ controls.enableDamping = true
 const clock = new Clock();
 
 const planets = [
-    { name: sun, speed: 0.00025, position:{x: 0, y: 0, z: 0}, velocity: 1.0001},
-    { name: mercury, speed: 0.00025, position: {x: 35, y:0, z: 0}, velocity: 1.0002},
-    { name: venus, speed: 0.00025, position: {x:42, y:0, z: 0}, velocity: 1.0006},
-    { name: earth, speed: 0.00125, position: {x:49, y:0, z: 0}, velocity: 1.0008},
-    { name: mars, speed: 0.00025, position: {x:-56, y:0, z: 0 }, velocity: 1.0004},
-    { name: jupiter, speed: 0.003, position: {x:67, y:0, z: 0}, velocity: 1.0006},
-    { name: saturne, speed: 0.00025, position:  {x:-84, y: 0,z: 0}, velocity: 1.0009},
-    { name: uranus, speed: 0.00025, position: {x:91, y: 0, z: 0 }, velocity: 1.0007},
-    { name: neptune, speed: 0.00025, position: {x: -97, y:0, z: 0}, velocity: 1.0001},
-    { name: saturneRings, speed: 0.00025, position: {x: -84, y:0, z: 0}, velocity: 1.0007},
+    { name: sun, speed: 0.00025, position:{x: 0, y: 0, z: 0}, velocity: 1.01},
+    { name: mercury, speed: 0.00025, position: {x: 35, y:0, z: 0}, velocity: 1.02},
+    { name: venus, speed: 0.00025, position: {x:42, y:0, z: 0}, velocity: 1.006},
+    { name: earth, speed: 0.00125, position: {x:49, y:0, z: 0}, velocity: 1.8},
+    { name: mars, speed: 0.00025, position: {x:-56, y:0, z: 0 }, velocity: 1.4},
+    { name: jupiter, speed: 0.003, position: {x:67, y:0, z: 0}, velocity: 1.06},
+    { name: saturne, speed: 0.00025, position:  {x:-84, y: 0,z: 0}, velocity: 1.09},
+    { name: uranus, speed: 0.00025, position: {x:91, y: 0, z: 0 }, velocity: 1.007},
+    { name: neptune, speed: 0.00025, position: {x: -97, y:0, z: 0}, velocity: 1.01},
+    { name: saturneRings, speed: 0.00025, position: {x: -84, y:0, z: 0}, velocity: 1.007},
 ];
 
 //Create planet path
