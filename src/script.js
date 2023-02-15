@@ -6,6 +6,11 @@ import {Clock} from "three";
 //Scene
 const scene = new THREE.Scene();
 
+// Raycaster
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+let intersects;
+
 //Load textures
 const sunTexture = 'textures/solar-gif.gif';
 const mercuryTexture = 'textures/mercury.jpeg';
@@ -16,11 +21,12 @@ const jupiterTexture = 'textures/jupiter.jpeg';
 const saturnTexture = 'textures/saturn.jpeg';
 const uranusTexture = 'textures/uranus.jpeg';
 const neptuneTexture = 'textures/neptune.jpeg';
-const plutonTexture = 'textures/pluton.jpeg';
 
 //Sun
 const sun = new CelestialObject(30, 32,16, sunTexture, 0, 0, 0 );
+
 scene.add(sun.planet);
+
 
 //Mercure
 const mercury = new CelestialObject(1, 32,16,mercuryTexture, 35, 0, 0 );
@@ -30,6 +36,7 @@ scene.add(mercury.planet);
 const venus = new CelestialObject(1, 32,16, venusTexture, -42, 0, 0 );
 venus.planet.rotateX(3.08923);
 scene.add(venus.planet);
+
 
 //Earth
 const earth = new CelestialObject(2, 32,16, earthTexture, 49, 0, 0 );
@@ -155,7 +162,16 @@ const updatePositions = () => {
     });
 }
 
+
+const handleClickObject = ()=>{
+    if(intersects.length !== 0){
+        intersects[0].object.material.color.set( 0xff0000 );
+    }
+}
+
 const tick = () => {
+    raycaster.setFromCamera( pointer, camera );
+    intersects = raycaster.intersectObjects( scene.children );
     controls.update();
     renderer.render(scene, camera)
     window.requestAnimationFrame(tick)
@@ -164,4 +180,23 @@ const tick = () => {
 
 tick();
 
+window.addEventListener( 'pointermove',(e)=> onPointerMove(e,pointer) );
+window.addEventListener( 'click', handleClickObject );
+
 //reacaster
+
+/*
+
+window.addEventListener('click', () => {
+       if(currentIntersect) {
+           switch(currentIntersect.object.name) {
+
+      case 'object4':
+      //
+       break;
+           }
+       }
+   })
+
+
+ */
