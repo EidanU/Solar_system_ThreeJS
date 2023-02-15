@@ -3,7 +3,7 @@ import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 import CelestialObject from "./CelestialObject.js";
 import {Clock} from "three";
 import {onPointerMove} from "./utils/pointerMove.js";
-import {handleClickObject} from "./utils/handleClick.js";
+import {handleClickObject, handleFollow} from "./utils/handleClick.js";
 import {updatePositions} from "./utils/updatePositions.js";
 import {createPlanetPath} from "./utils/createPlanetPath.js";
 
@@ -28,13 +28,13 @@ const uranusTexture = 'textures/uranus.jpeg';
 const neptuneTexture = 'textures/neptune.jpeg';
 
 //Sun
-const sun = new CelestialObject(30, 32,16, sunTexture, 0, 0, 0 );
+const sun = new CelestialObject(30, 32,16, sunTexture, 0, 0, 0, "sun" );
 
 scene.add(sun.planet);
 
 
 //Mercure
-const mercury = new CelestialObject(1, 32,16,mercuryTexture, 35, 0, 0 );
+const mercury = new CelestialObject(1, 32,16,mercuryTexture, 35, 0, 0, "mercury" );
 scene.add(mercury.planet);
 
 //Venus
@@ -44,7 +44,7 @@ scene.add(venus.planet);
 
 
 //Earth
-const earth = new CelestialObject(2, 32,16, earthTexture, 49, 0, 0 );
+const earth = new CelestialObject(2, 32,16, earthTexture, 49, 0, 0, "earth" );
 earth.planet.rotateX(0.401426)
 scene.add(earth.planet);
 
@@ -80,12 +80,12 @@ saturneRings.position.set(-84, 0);
 scene.add(saturneRings);
 
 //Uranus
-const uranus = new CelestialObject(1, 32,16, uranusTexture, 91, 0, 0 );
+const uranus = new CelestialObject(1, 32,16, uranusTexture, 91, 0, 0, "uranus" );
 uranus.planet.rotateX(1.692969);
 scene.add(uranus.planet);
 
 //Neptune
-const neptune = new CelestialObject(1, 32,16, neptuneTexture, -97, 0, 0 );
+const neptune = new CelestialObject(1, 32,16, neptuneTexture, -97, 0, 0, "neptune" );
 neptune.planet.rotateX(0.4886922);
 scene.add(neptune.planet);
 
@@ -156,19 +156,3 @@ tick();
 window.addEventListener( 'pointermove',(e)=> onPointerMove(e,pointer) );
 window.addEventListener( 'click', () => planetToFollow = handleClickObject(intersects, camera, jupiter));
 
-
-/*
-
-window.addEventListener('click', () => {
-       if(currentIntersect) {
-           switch(currentIntersect.object.name) {
-
-      case 'object4':
-      //
-       break;
-           }
-       }
-   })
-
-
- */
