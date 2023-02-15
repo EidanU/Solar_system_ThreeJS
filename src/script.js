@@ -14,6 +14,7 @@ const scene = new THREE.Scene();
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 let intersects;
+let planetToFollow;
 
 //Load textures
 const sunTexture = 'textures/solar-gif.gif';
@@ -37,7 +38,7 @@ const mercury = new CelestialObject(1, 32,16,mercuryTexture, 35, 0, 0 );
 scene.add(mercury.planet);
 
 //Venus
-const venus = new CelestialObject(1, 32,16, venusTexture, -42, 0, 0 );
+const venus = new CelestialObject(1, 32,16, venusTexture, -42, 0, 0 , "venus");
 venus.planet.rotateX(3.08923);
 scene.add(venus.planet);
 
@@ -48,17 +49,17 @@ earth.planet.rotateX(0.401426)
 scene.add(earth.planet);
 
 //Mars
-const mars = new CelestialObject(1, 32,16, marsTexture, -56, 0, 0 );
+const mars = new CelestialObject(1, 32,16, marsTexture, -56, 0, 0, "mars" );
 mars.planet.rotateX(0.436332)
 scene.add(mars.planet);
 
 //Jupiter
-const jupiter = new CelestialObject(4, 32,16, jupiterTexture, 67, 0, 0 );
+const jupiter = new CelestialObject(4, 32,16, jupiterTexture, 67, 0, 0, "jupiter" );
 jupiter.planet.rotateX(0.0523599);
 scene.add(jupiter.planet);
 
 //Saturne
-const saturne = new CelestialObject(3, 32,16, saturnTexture, -84, 0, 0 );
+const saturne = new CelestialObject(3, 32,16, saturnTexture, -84, 0, 0, "saturne" );
 saturne.planet.rotateX(0.4537856);
 scene.add(saturne.planet);
 
@@ -139,9 +140,11 @@ const planets = [
 //Create planet path
 createPlanetPath(planets, scene);
 
+
 const tick = () => {
     raycaster.setFromCamera( pointer, camera );
     intersects = raycaster.intersectObjects( scene.children );
+    planetToFollow && handleFollow(planetToFollow.planet, planetToFollow.sizes, camera);
     controls.update();
     renderer.render(scene, camera)
     window.requestAnimationFrame(tick)
@@ -151,9 +154,8 @@ const tick = () => {
 tick();
 
 window.addEventListener( 'pointermove',(e)=> onPointerMove(e,pointer) );
-window.addEventListener( 'click', () => handleClickObject(intersects) );
+window.addEventListener( 'click', () => planetToFollow = handleClickObject(intersects, camera, jupiter));
 
-//reacaster
 
 /*
 
