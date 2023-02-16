@@ -11,6 +11,16 @@ import TextMesh from "./objects/TextMesh.js";
 import {cameraZooming, dezoom} from "./utils/zoom.js";
 import {textFollow} from "./utils/text.js";
 import {addStars} from "./objects/Stars.js";
+import sunTexture from "../public/assets/objectTextures/solar-gif.gif"
+import mercuryTexture from "../public/assets/objectTextures/mercury.jpeg"
+import venusTexture from "../public/assets/objectTextures/venus.jpeg"
+import earthTexture from "../public/assets/objectTextures/earth.jpeg"
+import marsTexture from "../public/assets/objectTextures/mars.jpeg"
+import jupiterTexture from "../public/assets/objectTextures/jupiter.jpeg"
+import saturnTexture from "../public/assets/objectTextures/saturn.jpeg"
+import uranusTexture from "../public/assets/objectTextures/uranus.jpeg"
+import neptuneTexture from "../public/assets/objectTextures/neptune.jpeg"
+
 
 
 //Scene
@@ -26,16 +36,6 @@ let planetText;
 let planetList = [];
 let isZooming = false
 
-//Load objectTextures
-const sunTexture = "../public/assets/objectTextures/solar-gif.gif";
-const mercuryTexture = '../public/assets/objectTextures/mercury.jpeg';
-const venusTexture = '../public/assets/objectTextures/venus.jpeg';
-const earthTexture = '../public/assets/objectTextures/earth.jpeg';
-const marsTexture = '../public/assets/objectTextures/mars.jpeg';
-const jupiterTexture = '../public/assets/objectTextures/jupiter.jpeg';
-const saturnTexture = '../public/assets/objectTextures/saturn.jpeg';
-const uranusTexture = '../public/assets/objectTextures/uranus.jpeg';
-const neptuneTexture = '../public/assets/objectTextures/neptune.jpeg';
 
 //Sun
 const sun = new CelestialObject(30, 32,16, sunTexture, 0, 0, 0, "sun" );
