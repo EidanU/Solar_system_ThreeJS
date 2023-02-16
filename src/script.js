@@ -106,8 +106,34 @@ neptune.planet.rotateX(0.4886922);
 planetList.push(neptune);
 scene.add(neptune.planet);
 
-const ambientLight = new THREE.AmbientLight( "#ffffff",  1);
-scene.add(ambientLight);
+const ambiantLight = new THREE.AmbientLight('#ffffff', .2)
+scene.add( ambiantLight );
+const light = new THREE.PointLight( '#ffffff', 1, 5000 );
+light.position.set( 0, 0, 0 );
+scene.add( light );
+/*
+const ambientLight1 = new THREE.DirectionalLight( "#ececec",  1);
+const ambientLight2 = new THREE.DirectionalLight( "#ececec",  1);
+ambientLight2.position(new THREE.Vector3(0, -1000, 0))
+
+sun.planet.add(ambientLight1);
+sun.planet.add(ambientLight2);
+*/
+
+const spotLight = new THREE.SpotLight( 0xffffff );
+spotLight.position.set( 0, 500, 0 );
+spotLight.castShadow = true;
+
+spotLight.shadow.mapSize.width = 1024;
+spotLight.shadow.mapSize.height = 1024;
+
+spotLight.shadow.camera.near = 500;
+spotLight.shadow.camera.far = 4000;
+spotLight.shadow.camera.fov = 30;
+
+scene.add( spotLight.target );
+
+
 
 let w = 600;
 let h = 400;
@@ -122,7 +148,7 @@ const sizes = {
 }
 
 //Camera
-const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height );
+const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 1, 1000 );
 camera.position.set(0, 0, 300);
 scene.add(camera);
 
@@ -161,6 +187,7 @@ const tick = async  () => {
     controls.update();
     renderer.render(scene, camera);
     window.requestAnimationFrame(tick);
+
     if (!isZooming) {
         updatePositions(planets, sun, saturne, clock);
         planetToFollow && handleFollow(planetToFollow.planet, planetToFollow.sizes, camera, controls);
@@ -187,3 +214,6 @@ window.addEventListener('dblclick', () => {
     dezoom(controls, camera, sun)
 });
 
+/*
+gui.add(light.position, 'x').min(-20).max(20).step(0.01).name('camera x')
+ */
