@@ -14,12 +14,6 @@ class TextMesh {
                 font: font,
                 size: 1,
                 height: 1,
-                curveSegments: 1,
-                bevelEnabled: true,
-                bevelThickness: .1,
-                bevelSize: .1,
-                bevelOffset: 0,
-                bevelSegments: 1
             });
             const textMaterial = new THREE.MeshBasicMaterial(
                 { color: 'white', specular: 0xffffff }

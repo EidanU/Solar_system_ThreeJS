@@ -7,8 +7,9 @@ import {onPointerMove} from "./utils/pointerMove.js";
 import {handleClickObject, handleFollow} from "./utils/handleClick.js";
 import {updatePositions} from "./utils/updatePositions.js";
 import {createPlanetPath} from "./utils/createPlanetPath.js";
-import {TextGeometry} from "three/addons/geometries/TextGeometry.js";
-import {FontLoader} from "three/addons/loaders/FontLoader.js";
+import TextMesh from "./objects/TextMesh.js";
+import {cameraZooming, dezoom} from "./utils/zoom.js";
+import {textFollow} from "./utils/text.js";
 
 
 //Scene
