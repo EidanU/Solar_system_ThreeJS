@@ -10,6 +10,8 @@ import {createPlanetPath} from "./utils/createPlanetPath.js";
 import TextMesh from "./objects/TextMesh.js";
 import {cameraZooming, dezoom} from "./utils/zoom.js";
 import {textFollow} from "./utils/text.js";
+import {addStars} from "./objects/Stars.js";
+
 
 
 //Scene
@@ -180,6 +182,9 @@ const planets = [
 
 //Create planet path
 createPlanetPath(planets, scene);
+
+//Create stars
+addStars(scene);
 
 const tick = async  () => {
     raycaster.setFromCamera( pointer, camera );
