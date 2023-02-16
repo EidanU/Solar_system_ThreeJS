@@ -25,16 +25,16 @@ let planetText;
 let planetList = [];
 let isZooming = false
 
-//Load textures
-const sunTexture = 'assets/textures/solar-gif.gif';
-const mercuryTexture = 'assets/textures/mercury.jpeg';
-const venusTexture = 'assets/textures/venus.jpeg';
-const earthTexture = 'assets/textures/earth.jpeg';
-const marsTexture = 'assets/textures/mars.jpeg';
-const jupiterTexture = 'assets/textures/jupiter.jpeg';
-const saturnTexture = 'assets/textures/saturn.jpeg';
-const uranusTexture = 'assets/textures/uranus.jpeg';
-const neptuneTexture = 'assets/textures/neptune.jpeg';
+//Load objectTextures
+const sunTexture = 'assets/objectTextures/solar-gif.gif';
+const mercuryTexture = 'assets/objectTextures/mercury.jpeg';
+const venusTexture = 'assets/objectTextures/venus.jpeg';
+const earthTexture = 'assets/objectTextures/earth.jpeg';
+const marsTexture = 'assets/objectTextures/mars.jpeg';
+const jupiterTexture = 'assets/objectTextures/jupiter.jpeg';
+const saturnTexture = 'assets/objectTextures/saturn.jpeg';
+const uranusTexture = 'assets/objectTextures/uranus.jpeg';
+const neptuneTexture = 'assets/objectTextures/neptune.jpeg';
 
 //Sun
 const sun = new CelestialObject(30, 32,16, sunTexture, 0, 0, 0, "sun" );
