@@ -12,8 +12,6 @@ import {cameraZooming, dezoom} from "./utils/zoom.js";
 import {textFollow} from "./utils/text.js";
 import {addStars} from "./objects/Stars.js";
 
-
-
 //Scene
 const scene = new THREE.Scene();
 const clock = new Clock();
@@ -28,15 +26,15 @@ let planetList = [];
 let isZooming = false
 
 //Load textures
-const sunTexture = 'textures/solar-gif.gif';
-const mercuryTexture = 'textures/mercury.jpeg';
-const venusTexture = 'textures/venus.jpeg';
-const earthTexture = 'textures/earth.jpeg';
-const marsTexture = 'textures/mars.jpeg';
-const jupiterTexture = 'textures/jupiter.jpeg';
-const saturnTexture = 'textures/saturn.jpeg';
-const uranusTexture = 'textures/uranus.jpeg';
-const neptuneTexture = 'textures/neptune.jpeg';
+const sunTexture = 'assets/textures/solar-gif.gif';
+const mercuryTexture = 'assets/textures/mercury.jpeg';
+const venusTexture = 'assets/textures/venus.jpeg';
+const earthTexture = 'assets/textures/earth.jpeg';
+const marsTexture = 'assets/textures/mars.jpeg';
+const jupiterTexture = 'assets/textures/jupiter.jpeg';
+const saturnTexture = 'assets/textures/saturn.jpeg';
+const uranusTexture = 'assets/textures/uranus.jpeg';
+const neptuneTexture = 'assets/textures/neptune.jpeg';
 
 //Sun
 const sun = new CelestialObject(30, 32,16, sunTexture, 0, 0, 0, "sun" );
@@ -151,7 +149,7 @@ const sizes = {
 
 //Camera
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 1, 1000 );
-camera.position.set(0, 0, 300);
+camera.position.set(0, 0, 200);
 scene.add(camera);
 
 
