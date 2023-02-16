@@ -7,14 +7,21 @@ class CelestialObject {
     planet;
     position;
     texture;
+    sizes;
 
-    constructor(radius, widthSegments, heightSegments, texture, x, y, z,) {
+    constructor(radius, widthSegments, heightSegments, texture, x, y, z, name) {
         this.geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments );
         this.texture = new THREE.TextureLoader().load(texture);
-        this.materiel = new THREE.MeshPhongMaterial({map: this.texture});
+        if(name === "sun"){
+            this.materiel = new THREE.MeshBasicMaterial({map: this.texture});
+        }else{
+            this.materiel = new THREE.MeshPhongMaterial({map: this.texture});
+        }
         //this.texture = new THREE.TextureLoader().load(texture);
         this.planet = new THREE.Mesh(this.geometry, this.materiel);
         this.planet.position.set(x, y, z);
+        this.planet.name = name
+        this.getPlanetSize();
     }
 
     updateX = (X) => {
@@ -29,7 +36,15 @@ class CelestialObject {
         this.planet.position.z += Z;
     }
 
-
+    getPlanetSize = () => {
+        const boundingBox = new THREE.Box3().setFromObject(this.planet);
+        const planetSizes = boundingBox.getSize(boundingBox.max);
+        this.sizes = {
+            x: planetSizes.x,
+            y: planetSizes.y,
+            z: planetSizes.z,
+        };
+    }
 }
 
 export default  CelestialObject;
