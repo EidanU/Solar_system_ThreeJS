@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import gsap from 'gsap';
 
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 import CelestialObject from "./CelestialObject.js";
@@ -21,6 +20,7 @@ const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 let intersects;
 let planetToFollow;
+let planetText;
 let planetList = [];
 let isZooming = false
 
@@ -123,8 +123,8 @@ const sizes = {
 //Camera
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height );
 camera.position.set(0, 0, 300);
-// scene.add(camera);
-//
+scene.add(camera);
+
 
 const canvas = document.querySelector('.webgl');
 
@@ -179,5 +179,10 @@ window.addEventListener( 'click', async () => {
         planetText = new TextMesh(planetToFollow.planet.name, scene, camera);
         isZooming = await cameraZooming(clock, controls, camera, planetToFollow);
     }
+});
+
+window.addEventListener('dblclick', () => {
+    planetToFollow = null;
+    dezoom(controls, camera, sun)
 });
 

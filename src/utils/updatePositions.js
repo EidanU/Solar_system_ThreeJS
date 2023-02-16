@@ -1,4 +1,4 @@
-export const updatePositions = (planets, sun, saturne, clock, timePassed) => {
+export const updatePositions = (planets, sun, saturne, clock) => {
 
 
     planets.forEach((planet) => {
