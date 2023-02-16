@@ -1,8 +1,14 @@
 import * as THREE from "three";
 
-export const handleClickObject = (intersects, camera, planets) => {
+export const handleClickObject = (intersects, camera, planets, planetToFollow = null) => {
+
     if (intersects.length === 0) {
-        return null
+        if(planetToFollow){
+            return planetToFollow
+        }else{
+            return null
+        }
+
     }
 
     return planets.filter((planet)=>{

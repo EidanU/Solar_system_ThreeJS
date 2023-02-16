@@ -9,7 +9,7 @@ export const loadText = (scene, camera) => {
 
     let meshArray = [];
     loader.load( 'fonts/helvetiker_regular.typeface.json', ( font ) => {
-       console.log('test')
+
         const textGeometry = new TextGeometry( 'Solar system', {
             font: font,
             size: 7,
