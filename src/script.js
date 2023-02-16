@@ -12,8 +12,6 @@ import {cameraZooming, dezoom} from "./utils/zoom.js";
 import {textFollow} from "./utils/text.js";
 import {addStars} from "./objects/Stars.js";
 
-
-
 //Scene
 const scene = new THREE.Scene();
 const clock = new Clock();
