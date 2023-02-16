@@ -12,6 +12,7 @@ import {cameraZooming, dezoom} from "./utils/zoom.js";
 import {textFollow} from "./utils/text.js";
 import {addStars} from "./objects/Stars.js";
 
+
 //Scene
 const scene = new THREE.Scene();
 const clock = new Clock();
@@ -26,15 +27,15 @@ let planetList = [];
 let isZooming = false
 
 //Load objectTextures
-const sunTexture = 'assets/objectTextures/solar-gif.gif';
-const mercuryTexture = 'assets/objectTextures/mercury.jpeg';
-const venusTexture = 'assets/objectTextures/venus.jpeg';
-const earthTexture = 'assets/objectTextures/earth.jpeg';
-const marsTexture = 'assets/objectTextures/mars.jpeg';
-const jupiterTexture = 'assets/objectTextures/jupiter.jpeg';
-const saturnTexture = 'assets/objectTextures/saturn.jpeg';
-const uranusTexture = 'assets/objectTextures/uranus.jpeg';
-const neptuneTexture = 'assets/objectTextures/neptune.jpeg';
+const sunTexture = "../public/assets/objectTextures/solar-gif.gif";
+const mercuryTexture = '../public/assets/objectTextures/mercury.jpeg';
+const venusTexture = '../public/assets/objectTextures/venus.jpeg';
+const earthTexture = '../public/assets/objectTextures/earth.jpeg';
+const marsTexture = '../public/assets/objectTextures/mars.jpeg';
+const jupiterTexture = '../public/assets/objectTextures/jupiter.jpeg';
+const saturnTexture = '../public/assets/objectTextures/saturn.jpeg';
+const uranusTexture = '../public/assets/objectTextures/uranus.jpeg';
+const neptuneTexture = '../public/assets/objectTextures/neptune.jpeg';
 
 //Sun
 const sun = new CelestialObject(30, 32,16, sunTexture, 0, 0, 0, "sun" );
